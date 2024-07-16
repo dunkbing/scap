@@ -1,6 +1,7 @@
 mod engine;
 
 use std::sync::mpsc;
+use xcap::Window;
 
 use crate::{
     frame::{Frame, FrameType},
@@ -103,4 +104,34 @@ impl Capturer {
     pub fn get_output_frame_size(&mut self) -> [u32; 2] {
         self.engine.get_output_frame_size()
     }
+}
+
+pub struct WindowScData {
+    pub width: u32,
+    pub height: u32,
+    pub data: Vec<u8>,
+}
+
+pub fn capture_window_sc_raw(window_id: u32) -> Option<WindowScData> {
+    let windows = Window::all().unwrap();
+
+    for window in windows {
+        if window.id() != window_id {
+            continue;
+        }
+
+        println!(
+            "Window: {:?} {:?} {:?}",
+            window.title(),
+            (window.x(), window.y(), window.width(), window.height()),
+            (window.is_minimized(), window.is_maximized())
+        );
+
+        let image = window.capture_image().unwrap();
+        let width = image.width();
+        let height = image.height();
+        let data = image.into_raw();
+        return Some(WindowScData { width, height, data });
+    }
+    return None;
 }
