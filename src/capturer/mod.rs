@@ -131,7 +131,11 @@ pub fn capture_window_sc_raw(window_id: u32) -> Option<WindowScData> {
         let width = image.width();
         let height = image.height();
         let data = image.into_raw();
-        return Some(WindowScData { width, height, data });
+        return Some(WindowScData {
+            width,
+            height,
+            data,
+        });
     }
     return None;
 }
