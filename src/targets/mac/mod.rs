@@ -59,11 +59,14 @@ pub fn get_all_targets() -> Vec<Target> {
             let id = window.window_id;
             let title = window.title.expect("Window title not found");
             let raw_handle: CGWindowID = id;
+            let app = window.owning_application.unwrap();
+            let bundle_identifier = app.bundle_identifier.unwrap();
 
             let target = Target::Window(super::Window {
                 id,
                 title,
                 raw_handle,
+                bundle_identifier,
             });
             targets.push(target);
         }

@@ -17,6 +17,9 @@ pub struct Window {
 
     #[cfg(target_os = "macos")]
     pub raw_handle: core_graphics_helmer_fork::window::CGWindowID,
+
+    #[cfg(target_os = "macos")]
+    pub bundle_identifier: String,
 }
 
 #[derive(Debug, Clone)]

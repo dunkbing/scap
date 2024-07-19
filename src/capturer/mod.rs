@@ -120,13 +120,6 @@ pub fn capture_window_sc_raw(window_id: u32) -> Option<WindowScData> {
             continue;
         }
 
-        println!(
-            "Window: {:?} {:?} {:?}",
-            window.title(),
-            (window.x(), window.y(), window.width(), window.height()),
-            (window.is_minimized(), window.is_maximized())
-        );
-
         let image = window.capture_image().unwrap();
         let width = image.width();
         let height = image.height();
