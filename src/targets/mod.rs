@@ -11,6 +11,9 @@ mod linux;
 pub struct Window {
     pub id: u32,
     pub title: String,
+    pub width: u32,
+    pub height: u32,
+    pub is_on_screen: bool,
 
     #[cfg(target_os = "windows")]
     pub raw_handle: windows::Win32::Foundation::HWND,
